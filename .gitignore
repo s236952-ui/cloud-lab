@@ -2,3 +2,8 @@
 *.tmp
 bin/
 build/
+.env
+mern-demo/.env
+node_modules/
+mern-demo/node_modules/
+mern-demo/client/node_modules/
