@@ -13,7 +13,6 @@ mongoose.connect(MONGO_URI)
   .then(() => console.log('>>> KET NOI MONGODB THANH CONG <<<'))
   .catch(err => console.error('>>> LOI KET NOI MONGODB:', err.message));
 
-// Định nghĩa Model Student
 const studentSchema = new mongoose.Schema({
   studentId: String,
   mssv: String,
@@ -23,18 +22,11 @@ const studentSchema = new mongoose.Schema({
 
 const Student = mongoose.models.Student || mongoose.model('Student', studentSchema, 'students');
 
-// API Hello World
 app.get('/api/hello', (req, res) => {
   res.json({ message: "Backend MERN đang hoạt động!" });
 });
 
-// 1. API Lấy danh sách sinh viên (GET)
 app.get('/api/students', async (req, res) => {
-  if (mongoose.connection.readyState !== 1) {
-    return res.status(500).json({ 
-      error: "Chưa kết nối CSDL. Trạng thái Mongoose: " + mongoose.connection.readyState 
-    });
-  }
   try {
     const students = await Student.find();
     res.json(students);
@@ -43,7 +35,6 @@ app.get('/api/students', async (req, res) => {
   }
 });
 
-// 2. API Thêm sinh viên mới (POST - Sửa lỗi 404)
 app.post('/api/students', async (req, res) => {
   try {
     const { mssv, studentId, name, email } = req.body;
@@ -60,7 +51,6 @@ app.post('/api/students', async (req, res) => {
   }
 });
 
-// 3. API Cập nhật sinh viên (PUT - Dùng cho Câu 77)
 app.put('/api/students/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -71,7 +61,6 @@ app.put('/api/students/:id', async (req, res) => {
   }
 });
 
-// 4. API Xóa sinh viên (DELETE - Dùng cho Câu 78)
 app.delete('/api/students/:id', async (req, res) => {
   try {
     const { id } = req.params;

@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  # Câu 81: Khai báo service backend
+  backend:
+    build: ./server
+    container_name: mern-backend
+    # Câu 83: Ánh xạ port 5000 cho backend
+    ports:
+      - "5000:5000"
+    # Câu 85: Cấu hình biến môi trường MONGODB_URI
+    environment:
+      - MONGODB_URI=mongodb+srv://sieut366_db_user:sieu25022005chuong@cluster0.h3rcwpg.mongodb.net/test?retryWrites=true&w=majority
+      - PORT=5000
+
+  # Câu 82: Khai báo service frontend
+  frontend:
+    build: ./client
+    container_name: mern-frontend
+    # Câu 84: Ánh xạ port 3000 cho frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
