@@ -74,7 +74,7 @@ function App() {
 
   return (
     <div style={{ padding: '20px', color: '#fff', backgroundColor: '#1a1a1a', minHeight: '100vh', fontFamily: 'sans-serif' }}>
-      <h1 style={{ textAlign: 'center' }}>Quản Lý Sinh Viên MERN</h1>
+     <h1 style={{ textAlign: 'center' }}>Quản Lý Sinh Viên MERN - v2.0</h1>
       
       <form onSubmit={handleSubmit} style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginBottom: '20px' }}>
         <input placeholder="MSSV" value={form.mssv} onChange={e => setForm({...form, mssv: e.target.value})} style={{ padding: '8px' }} />

@@ -1,0 +1,17 @@
+services:
+  # Câu 51: Khai báo Service backend dùng Image trên Docker Hub
+  backend:
+    image: sieutruong/mern-backend:1.0
+    # Câu 53: Ánh xạ port 5000:5000 cho Backend
+    ports:
+      - "5000:5000"
+    # Câu 55: Cấu hình biến môi trường MONGODB_URI
+    environment:
+      - MONGODB_URI=mongodb+srv://sieut366_db_user:sieu25022005chuong@cluster0.h3rcwpg.mongodb.net/test?retryWrites=true&w=majority
+  # Câu 52: Khai báo Service frontend dùng Image trên Docker Hub
+  frontend:
+    image: sieutruong/mern-frontend:2.0
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend

@@ -13,10 +13,9 @@ function App() {
     try {
       const res = await fetch(API_URL);
       const data = await res.json();
-      console.log("Dữ liệu từ Backend:", data);
       if (Array.isArray(data)) setStudents(data);
     } catch (err) {
-      console.error("Lỗi lấy danh sách:", err);
+      console.error("Loi lay danh sach:", err);
     }
   };
 
@@ -26,10 +25,7 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!form.mssv || !form.name || !form.email) {
-      alert("Vui lòng nhập đầy đủ thông tin!");
-      return;
-    }
+    if (!form.mssv || !form.name || !form.email) return;
 
     const payload = {
       mssv: form.mssv,
@@ -40,32 +36,24 @@ function App() {
     };
 
     try {
-      let res;
       if (editingId) {
-        res = await fetch(`${API_URL}/${editingId}`, {
+        await fetch(`${API_URL}/${editingId}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         });
         setEditingId(null);
       } else {
-        res = await fetch(API_URL, {
+        await fetch(API_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         });
       }
-
-      if (!res.ok) {
-        alert(`Lỗi Server (${res.status}): Không thể lưu sinh viên.`);
-        return;
-      }
-
       setForm({ mssv: '', name: '', email: '' });
-      await fetchStudents();
+      fetchStudents();
     } catch (err) {
-      console.error("Lỗi lưu sinh viên:", err);
-      alert("Không kết nối được Backend. Hãy kiểm tra Port 5000 đã set Public trên Codespaces chưa!");
+      console.error("Loi luu sinh vien:", err);
     }
   };
 
@@ -77,16 +65,16 @@ function App() {
 
   const handleDelete = async (id) => {
     try {
-      const res = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
-      if (res.ok) fetchStudents();
+      await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+      fetchStudents();
     } catch (err) {
-      console.error("Lỗi xóa sinh viên:", err);
+      console.error("Loi xoa sinh vien:", err);
     }
   };
 
   return (
     <div style={{ padding: '20px', color: '#fff', backgroundColor: '#1a1a1a', minHeight: '100vh', fontFamily: 'sans-serif' }}>
-      <h1 style={{ textAlign: 'center' }}>Quản Lý Sinh Viên MERN</h1>
+     <h1 style={{ textAlign: 'center' }}>Quản Lý Sinh Viên MERN - v2.0</h1>
       
       <form onSubmit={handleSubmit} style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginBottom: '20px' }}>
         <input placeholder="MSSV" value={form.mssv} onChange={e => setForm({...form, mssv: e.target.value})} style={{ padding: '8px' }} />
