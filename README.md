@@ -1,6 +1,6 @@
 # Cloud Computing Laboratory
 
-Student Name: Truong
-Student ID: ...
-Class: ...
+Student Name: Trương Văn Siêu
+Student ID: 236952
+Class: DH23TIN08
 Cloud Computing Laboratory
